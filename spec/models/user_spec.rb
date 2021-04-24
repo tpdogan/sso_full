@@ -36,4 +36,19 @@ RSpec.describe User, type: :model do
       expect(user2).to eq(false)
     end
   end
+
+  context 'password tests' do
+    it 'should have a minimum password length of 6' do
+      user1 = User.new(username: 'username', password: '123').save
+      user2 = User.new(username: 'username', password: '123456').save
+      expect(user1).to eq(false)
+      expect(user2).to eq(true)
+    end
+
+    it 'should save password with encryption' do
+      pass = '123456'
+      user = User.create(username: 'username', password: pass)
+      expect(user.password).not_to eq(pass)
+    end
+  end
 end
