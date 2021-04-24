@@ -51,4 +51,16 @@ RSpec.describe User, type: :model do
       expect(user.password).not_to eq(pass)
     end
   end
+
+  context 'association tests' do
+    let (:user) {User.create(username: 'username', password: 'password')}
+
+    it 'should have many userApps' do
+      expect(user.user_apps).not_to eq(nil)
+    end
+
+    it 'should have many clients' do
+      expect(user.clients).not_to eq(nil)
+    end
+  end
 end
