@@ -12,4 +12,17 @@ RSpec.describe Client, type: :model do
       expect(client).to eq(true)
     end
   end
+
+  context 'generation test' do
+    let(:client) { Client.create(client_name: 'client') }
+    it 'should generate client id' do
+      expect(client.client_id).not_to eq('')
+      expect(client.client_id).not_to eq(nil)
+    end
+
+    it 'should generate client secret' do
+      expect(client.client_secret).not_to eq('')
+      expect(client.client_secret).not_to eq(nil)
+    end
+  end
 end
