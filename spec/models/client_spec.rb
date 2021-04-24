@@ -34,4 +34,16 @@ RSpec.describe Client, type: :model do
       expect(client2).to eq(false)
     end
   end
+
+  context 'association tests' do
+    let (:client) {Client.create(client_name: 'client')}
+
+    it 'should have many userApps' do
+      expect(client.user_apps).not_to eq(nil)
+    end
+
+    it 'should have many users' do
+      expect(client.users).not_to eq(nil)
+    end
+  end
 end
