@@ -25,4 +25,13 @@ RSpec.describe Client, type: :model do
       expect(client.client_secret).not_to eq(nil)
     end
   end
+
+  context 'uniqueness test' do
+    it 'should have a unique name' do
+      client1 = Client.new(client_name: 'client').save
+      client2 = Client.new(client_name: 'client').save
+      expect(client1).to eq(true)
+      expect(client2).to eq(false)
+    end
+  end
 end
