@@ -4,5 +4,6 @@ class UserApp < ApplicationRecord
   belongs_to :user
   belongs_to :client
 
+  has_one :auth
   has_one :token
 end
