@@ -27,4 +27,13 @@ RSpec.describe User, type: :model do
       expect(userSaved).to eq(true)
     end
   end
+
+  context 'uniqueness test' do
+    it 'should have a unique username' do
+      user1 = User.new(username: 'username', password: 'password').save
+      user2 = User.new(username: 'username', password: 'password').save
+      expect(user1).to eq(true)
+      expect(user2).to eq(false)
+    end
+  end
 end
