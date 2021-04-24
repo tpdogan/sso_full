@@ -19,7 +19,7 @@ RSpec.describe Token, type: :model do
 
   context 'association tests' do
     it 'should belong to a userApp' do
-      expect(token.userApp).to eq(userApp)
+      expect(UserApp.find(token.user_app_id)).to eq(userApp)
     end
   end
 end
