@@ -16,7 +16,7 @@ RSpec.describe Auth, type: :model do
     let (:userApp) {UserApp.create(user_id: user.id, client_id: client.id, auth_id: auth.id)}
 
     it 'should belong to a userApp' do
-      expect(auth.user_app).to eq(userApp)
+      expect(auth.userApp).to eq(userApp)
     end
   end
 end

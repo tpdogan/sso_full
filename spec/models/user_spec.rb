@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
     let (:user) {User.create(username: 'username', password: 'password')}
 
     it 'should have many userApps' do
-      expect(user.user_apps).not_to eq(nil)
+      expect(user.userApps).not_to eq(nil)
     end
 
     it 'should have many clients' do

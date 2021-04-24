@@ -39,7 +39,7 @@ RSpec.describe Client, type: :model do
     let (:client) {Client.create(client_name: 'client')}
 
     it 'should have many userApps' do
-      expect(client.user_apps).not_to eq(nil)
+      expect(client.userApps).not_to eq(nil)
     end
 
     it 'should have many users' do

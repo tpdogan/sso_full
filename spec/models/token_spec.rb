@@ -20,7 +20,7 @@ RSpec.describe Token, type: :model do
     let (:userApp) {UserApp.create(user_id: user.id, client_id: client.id, token_id: token.id)}
 
     it 'should belong to a userApp' do
-      expect(token.user_app).to eq(userApp)
+      expect(token.userApp).to eq(userApp)
     end
   end
 end
