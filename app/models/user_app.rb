@@ -2,6 +2,8 @@ class UserApp < ApplicationRecord
   validates_presence_of :user_id, :client_id
 
   belongs_to :user
+  belongs_to :client
+  
   validate :code_xor_token
   
   private
