@@ -3,13 +3,6 @@ class UserApp < ApplicationRecord
 
   belongs_to :user
   belongs_to :client
-  
-  validate :code_xor_token
-  
-  private
-  def code_xor_token
-    unless self.auth_id.present? ^ self.token_id.present?
-      errors.add(:base, 'Either auth_code or access_token must be present!')
-    end
-  end
+
+  has_one :token
 end
