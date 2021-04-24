@@ -1,5 +1,6 @@
 class Client < ApplicationRecord
   validates_presence_of :client_name
+  validates_uniqueness_of :client_name
 
   before_create do
     self.client_id = SecureRandom.uuid
