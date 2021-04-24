@@ -37,4 +37,27 @@ RSpec.describe UserApp, type: :model do
       expect(userApp).to eql(false)
     end
   end
+
+  context 'association tests' do
+    let (:user) { User.create(username: 'username', password: 'password') }
+    let (:client) { Client.create(client_name: 'client') }
+    let (:token) {Token.create()}
+    let (:userApp) {UserApp.create(user_id: user.id, client_id: client.id, token_id: token.id)}
+
+    it 'should have many users' do
+      expect(userApp.users).not_to eq(nil)
+    end
+
+    it 'should find the user' do
+      expect(userApp.users.find(user.id)).to eq(user)
+    end
+
+    it 'should have many clients' do
+      expect(userApp.clients).not_to eq(nil)
+    end
+
+    it 'should find the client' do
+      expect(userApp.clients.find(client.id)).to eq(client)
+    end
+  end
 end
