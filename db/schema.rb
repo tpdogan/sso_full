@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_213119) do
 
   create_table "user_apps", force: :cascade do |t|
     t.integer "user_id"
-    t.string "client_id"
+    t.integer "client_id"
     t.integer "auth_id"
     t.integer "token_id"
     t.datetime "created_at", precision: 6, null: false
