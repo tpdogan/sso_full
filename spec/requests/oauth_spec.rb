@@ -28,19 +28,19 @@ RSpec.describe "Oauths", type: :request do
 
   context "POST /login" do
     it 'should not login with wrong credentials' do
-      post '/oauth/login', params: {username: 'username', password: 'password'}
+      post '/oauth/login', params: { user: {username: 'username', password: 'password'} }
       expect(response.unauthorized?).to eq(true)
     end
 
     it 'should login with correct credentials' do
       user = User.create(username: 'username', password: 'password')
-      post '/oauth/login', params: {username: 'username', password: 'password'}
+      post '/oauth/login', params: { user: {username: 'username', password: 'password'} }
       expect(response.ok?).to eq(true)
     end
 
     it 'should redirect to authorize if parameter includes' do
       user = User.create(username: 'username', password: 'password')
-      post '/oauth/login', params: {username: 'username', password: 'password', redirect_uri: '/oauth/authorize'}
+      post '/oauth/login', params: { user: {username: 'username', password: 'password'}, redirect_uri: '/oauth/authorize'}
       expect(response.status).to eq(302)
       expect(response.redirect?).to eq(true)
     end
