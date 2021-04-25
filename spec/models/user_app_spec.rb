@@ -33,6 +33,7 @@ RSpec.describe UserApp, type: :model do
       expect(userAppCreate.create_auth).to eql(userAppCreate.auth)
       expect(userAppCreate.token).to eq(nil)
       expect(userAppCreate.create_token).to eql(userAppCreate.token)
+      userAppCreate.reload
       expect(userAppCreate.auth).to eq(nil)
     end
   end
