@@ -4,6 +4,6 @@ class UserApp < ApplicationRecord
   belongs_to :user
   belongs_to :client
 
-  has_one :auth
-  has_one :token
+  has_one :auth, dependent: :destroy
+  has_one :token, dependent: :destroy
 end

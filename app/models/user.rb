@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates_length_of :password, minimum: 6
 
   has_many :userApps
-  has_many :clients, through: :userApps
+  has_many :clients, through: :userApps, dependent: :destroy
 
   before_create do
     require "openssl"

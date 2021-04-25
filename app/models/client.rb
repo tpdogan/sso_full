@@ -3,7 +3,7 @@ class Client < ApplicationRecord
   validates_uniqueness_of :client_name
 
   has_many :userApps
-  has_many :users, through: :userApps
+  has_many :users, through: :userApps, dependent: :destroy
 
   before_create do
     self.client_id = SecureRandom.uuid
