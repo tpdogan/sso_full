@@ -43,6 +43,7 @@ class OauthController < ApplicationController
       render json: payload, status: :ok
     # Redirect user after successful login
     else
+      session[:user_id] = user.id
       redirect_to params[:redirect_uri]
     end
   end
