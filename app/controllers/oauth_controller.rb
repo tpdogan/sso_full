@@ -1,7 +1,7 @@
 class OauthController < ApplicationController
   def authorize
     client_id = authorize_params[:client_id]
-    client = Client.find_by(client_id: client_id)
+    @client = Client.find_by(client_id: client_id)
 
     paramsCheck = (["client_id", "redirect_uri", "response_type"] - authorize_params.keys)
     
@@ -13,7 +13,7 @@ class OauthController < ApplicationController
       }
       render json: payload, status: :bad_request
     # Check if client does not exist in the system
-    elsif !client
+    elsif !@client
       payload = {
         error: "client_id is unknown.",
         status: 403
