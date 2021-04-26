@@ -1,8 +1,13 @@
-<%= form_with(model: @user, url: '/login') do |f| %>
-  <%= f.label 'Username' %>
-  <%= f.text_field :username %>
+<% if session[:user_id] %>
+  <%= "You are logged in as  #{@user.username}" %>
+  <%= link_to 'Logout', logout_path, method: :delete %>
+<% else %>
+  <%= form_with(model: @user, url: '/login') do |f| %>
+    <%= f.label 'Username' %>
+    <%= f.text_field :username %>
 
-  <%= f.label 'Password' %>
-  <%= f.password_field :password %>
-  <%= f.submit "Log in" %>
+    <%= f.label 'Password' %>
+    <%= f.password_field :password %>
+    <%= f.submit "Log in" %>
+  <% end %>
 <% end %>
