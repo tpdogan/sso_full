@@ -6,6 +6,11 @@ class SessionsController < ApplicationController
     user = User.find_by(login_params)
     session[:user_id] = user.id
   end
+  def destroy
+    if session
+      reset_session
+    end
+  end
 
   private
 
