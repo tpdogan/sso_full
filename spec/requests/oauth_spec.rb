@@ -24,5 +24,15 @@ RSpec.describe "Oauths", type: :request do
       expect(response.status).to eq(302)
       expect(response.redirect?).to eq(true)
     end
+
+    it 'should view authorize page if user is logged in' do
+      user = User.create(username: 'username', password: '123654')
+      post '/login', params: { user: {username: 'username', password: '123654'} }
+
+      client = Client.create(client_name: 'client')
+      get '/oauth/authorize', params: {client_id: client.client_id, redirect_uri: 'random uri', response_type: 'code'}
+  
+      expect(response.body).to include("Do you authorize #{client.client_name}?")
+    end
   end
 end
