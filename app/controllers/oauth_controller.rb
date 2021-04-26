@@ -42,9 +42,37 @@ class OauthController < ApplicationController
     end
   end
 
+  def grant_token
+    client = Client.find_by(client_id: token_params[:client_id], client_secret: token_params[:client_secret])
+    auth = Auth.find_by(auth_code: token_params[:code])
+    userApp = UserApp.find(auth.user_app_id)
+    user = userApp.user
+    if client && userApp
+      token = userApp.create_token
+      payload = {
+        access_token: token.access_token,
+        token_type: "bearer",
+        scope: "read",
+        uid: user.id,
+        info: {username: user.username}
+      }
+      render json: payload, status: :ok
+    else
+      payload = {
+        error: "Client and authorization are not recognized.",
+        status: 403
+      }
+      render json: payload, status: :forbidden
+    end
+  end
+
   private
 
   def authorize_params
     params.permit(:client_id, :redirect_uri, :response_type)
+  end
+
+  def token_params
+    params.permit(:client_id, :client_secret, :code, :redirect_uri)
   end
 end
