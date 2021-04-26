@@ -25,6 +25,23 @@ class OauthController < ApplicationController
     end
   end
 
+  def grant_authorization
+    client_id = authorize_params[:client_id]
+    client = Client.find_by(client_id: client_id)
+
+    if params[:commit] == 'Yes'
+      userApp = UserApp.create(:user_id => session[:user_id], :client_id => client.id)
+      if userApp.save
+        userApp.create_auth
+        redirect_to (params[:redirect_uri] + "?code=#{userApp.auth.auth_code}")
+      else
+        redirect_to params[:redirect_uri]
+      end
+    else
+      redirect_to params[:redirect_uri]
+    end
+  end
+
   private
 
   def authorize_params
