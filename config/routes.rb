@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       get 'authorize' => 'oauth#authorize'
       patch 'authorize' => 'oauth#grant_authorization'
+      post 'token' => 'oauth#grant_token'
     end
   end
   get '/login' => 'sessions#new'
