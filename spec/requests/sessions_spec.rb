@@ -20,4 +20,14 @@ RSpec.describe "Sessions", type: :request do
       expect(session.empty?).to eq(false)
     end
   end
+
+  context "DELETE /destroy" do
+    it 'should destroy the session' do
+      user = User.create(username: 'username', password: '123654')
+      post '/login', params: { user: {username: 'username', password: '123654'} }
+      expect(session[:user_id]).to eq(user.id)
+      delete '/logout'
+      expect(session[:user_id]).to eq(nil)
+    end
+  end
 end
