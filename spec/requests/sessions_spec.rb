@@ -12,4 +12,12 @@ RSpec.describe "Sessions", type: :request do
       expect(response.content_type).to eq('text/html; charset=utf-8')
     end
   end
+
+  context "POST /create" do
+    it 'should create a session' do
+      user = User.create(username: 'username', password: '123654')
+      post '/login', params: { user: {username: 'username', password: '123654'} }
+      expect(session.empty?).to eq(false)
+    end
+  end
 end
