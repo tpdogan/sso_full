@@ -1,0 +1,5 @@
+<h2>Do you authorize <%= @client.client_name %>?</h2>
+<%= form_with(model: @client, url: request.original_url) do |f| %>
+  <%= f.submit "Yes" %>
+  <%= f.submit "No" %>
+<% end %>
