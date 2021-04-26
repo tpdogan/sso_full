@@ -5,4 +5,5 @@ Rails.application.routes.draw do
       post 'login' => 'oauth#login'
     end
   end
+  get '/login' => 'sessions#new'
 end
