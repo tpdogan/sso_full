@@ -35,4 +35,38 @@ RSpec.describe "Oauths", type: :request do
       expect(response.body).to include("Do you authorize #{client.client_name}?")
     end
   end
+
+  context 'GET /token' do
+    user = User.create(username: SecureRandom.alphanumeric(8), password: SecureRandom.alphanumeric(8))
+    client = Client.create(client_name: SecureRandom.alphanumeric(8))
+    userApp = UserApp.create(user_id: user.id, client_id: client.id)
+    userApp.save
+    auth = userApp.create_auth
+    code = auth.auth_code
+    request_params = {
+                      client_id: client.client_id,
+                      client_secret: client.client_secret,
+                      code: code,
+                      redirect_uri: 'http://localhost:3000/callback?'
+                     }
+
+    it 'should return json content' do
+      post '/oauth/token', params: request_params
+      expect(response.content_type).to eq("application/json; charset=utf-8")
+    end
+
+    it 'should return access token' do
+      post '/oauth/token', params: request_params
+
+      body = 
+      {
+        access_token: userApp.token.access_token,
+        token_type: "bearer",
+        scope: "read",
+        uid: user.id,
+        info: {username: user.username}
+      }
+      expect(response.body).to eq(body.to_json)
+    end
+  end
 end
