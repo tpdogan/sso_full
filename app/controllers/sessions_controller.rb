@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    @user = User.new
+    @user = session[:user_id] ? User.find(session[:user_id]) : User.new
   end
   def create
     user = User.find_by(login_params)
