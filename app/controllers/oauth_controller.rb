@@ -20,7 +20,7 @@ class OauthController < ApplicationController
       }
       render json: payload, status: :forbidden
     # If valid request is made but user is not logged in
-    else
+    elsif !session || !session[:user_id]
       redirect_to '/login', params: {redirect_uri: request.original_url}
     end
   end
