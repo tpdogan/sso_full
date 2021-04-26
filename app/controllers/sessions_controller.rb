@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
     if session
       reset_session
     end
+    redirect_to login_path
   end
 
   private
